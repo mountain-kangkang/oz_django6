@@ -11,8 +11,8 @@ jobs:
       DB_HOST: 127.0.0.1
       DB_PORT: 3306
       DB_USER: root
-      DB_PASSWORD: 1234
-      DB_DATABASE: oz_django
+      DB_PASSWORD: 0000
+      DB_DATABASE: oz_django6
 
     steps:
       # github action 이미지는 기본적으로 checkout이 안되어 있습니다.
