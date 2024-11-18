@@ -1,13 +1,16 @@
 from django.http import HttpRequest
 from ninja import Router, Schema
+
 from tabom.models import Like
 from tabom.services.like_service import do_like
 
 router = Router()
 
+
 class LikeRequest(Schema):
     user_id: int
     article_id: int
+
 
 class LikeResponse(Schema):
     id: int
