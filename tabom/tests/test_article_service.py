@@ -32,7 +32,7 @@ class TestArticleService(TestCase):
         Like.objects.create(user_id=user.id, article_id=articles[-1].id)
 
         # When
-        result_articles = get_article_list(0, 10)
+        # result_articles = get_article_list(0, 10)
 
         # Then
         # if len(result_articles) != 10:
@@ -42,6 +42,14 @@ class TestArticleService(TestCase):
         #     self.assertEqual(1, result_articles[0].like_set.count())
         #     self.assertEqual([a.id for a in result_articles], [b.id for b in reversed(articles[10:21])])
         # with self.assertNumQueries(2):
-        self.assertEqual(len(result_articles), 10)
-        self.assertEqual(1, result_articles[0].like_set.count())
-        self.assertEqual([a.id for a in result_articles], [b.id for b in reversed(articles[10:21])])
+        # self.assertEqual(len(result_articles), 10)
+        # self.assertEqual(1, result_articles[0].like_set.count())
+        # self.assertEqual([a.id for a in result_articles], [b.id for b in reversed(articles[10:21])])
+
+        with self.assertNumQueries(2):
+            result_articles = get_article_list(0, 10)
+            result_counts = [a.like_set.count() for a in result_articles]
+
+            self.assertEqual(len(result_articles), 10)
+            self.assertEqual(1, result_counts[0])
+            self.assertEqual([a.id for a in result_articles], [b.id for b in reversed(articles[10:21])])
